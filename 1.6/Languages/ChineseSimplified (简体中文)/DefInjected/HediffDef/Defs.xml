@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: Sea's Favor -->
+  <SeasFavor.label>海之眷顾</SeasFavor.label>
+  <!-- EN: Grace of the Sea, this character gains a lucky bonus -->
+  <SeasFavor.description>大海的钟爱！携带者会气运傍身！</SeasFavor.description>
+  <!-- EN: Grace of the Sea, this character gains a lucky bonus -->
+  <SeasFavor.descriptionCached>大海的钟爱！携带者会气运傍身！</SeasFavor.descriptionCached>
+  
+  <!-- EN: The taste of the sea -->
+  <Thetasteofthesea.label>海的味道！</Thetasteofthesea.label>
+  <!-- EN: Fish know the smell of bugs! -->
+  <Thetasteofthesea.description>虫子的味道鱼知道！</Thetasteofthesea.description>
+  
+</LanguageData>
