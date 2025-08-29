@@ -16,10 +16,10 @@
   <!-- EN: A fishing spot where your colonists will prioritize fishing. Can only be placed next to a fishing area -->
   <FishingSpot.description>一个钓鱼点，你的殖民者会优先在这里钓鱼。只能放置在钓鱼区旁边</FishingSpot.description>
   
-  <!-- EN: Golden Fishing Rod -->
+
   <GoldenFishingRod.label>金钓竿</GoldenFishingRod.label>
-  <!-- EN: This is a magical fishing rod that brings good luck to people -->
-  <GoldenFishingRod.description>这是一把魔法钓鱼竿，会给使用者带来好运</GoldenFishingRod.description>
+
+  <GoldenFishingRod.description>装备上这把钓竿，你就能同时使用两把钓竿进行钓鱼了，并且还能获得金钓竿带来的好运加成</GoldenFishingRod.description>
   <!-- EN: handle -->
   <GoldenFishingRod.tools.handle.label>TODO</GoldenFishingRod.tools.handle.label>
   

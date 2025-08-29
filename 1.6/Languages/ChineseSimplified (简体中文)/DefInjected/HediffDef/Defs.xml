@@ -12,5 +12,7 @@
   <Thetasteofthesea.label>海的味道！</Thetasteofthesea.label>
   <!-- EN: Fish know the smell of bugs! -->
   <Thetasteofthesea.description>虫子的味道鱼知道！</Thetasteofthesea.description>
-  
+
+  <dualfishingrods.label>钓鱼（双持钓竿）</dualfishingrods.label>
+  <dualfishingrods.description>该单位使用两把钓竿同时钓鱼，这大大提高了钓鱼速度和钓鱼效率</dualfishingrods.description>
 </LanguageData>
