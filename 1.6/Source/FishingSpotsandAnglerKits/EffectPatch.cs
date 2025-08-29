@@ -1,62 +1,42 @@
 ﻿using HarmonyLib;
 using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Verse.AI;
 using Verse;
+using Verse.AI;
 
 namespace FishingSpotsandAnglerKits
 {
     [HarmonyPatch(typeof(JobDriver_Fish), "MakeNewToils")]
-    public static class Patch_FishingEffect_HediffBased
+    public static class Patch_FishingEffect_Postfix
     {
-        static bool Prefix(JobDriver_Fish __instance, ref IEnumerable<Toil> __result)
+        private static readonly HediffDef SeasFavor = HediffDef.Named("SeasFavor");
+        private static readonly EffecterDef GoldenFishing = DefDatabase<EffecterDef>.GetNamed("GoldenFishing");
+
+        public static void Postfix(JobDriver_Fish __instance, ref IEnumerable<Toil> __result)
         {
-            Pawn pawn = __instance.pawn;
-            Job job = __instance.job;
+            var toils = new List<Toil>(__result);
 
-            var toils = new List<Toil>();
-
-            // Fail condition 保留原版
-            __instance.FailOn(() =>
-                !(job.GetTarget(TargetIndex.A).Cell.GetZone(pawn.Map) is Zone_Fishing zone_Fishing)
-                || !zone_Fishing.Allowed);
-
-            // Goto
-            Toil goTo = Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
-            toils.Add(goTo);
-
-            // 钓鱼等待 Toil
-            int ticks = Mathf.RoundToInt(7500f / pawn.GetStatValue(StatDefOf.FishingSpeed));
-            Toil toil = Toils_General.WaitWith(TargetIndex.A, ticks, useProgressBar: false, maintainPosture: true);
-
-            // 判断 Hediff
-            EffecterDef effectToUse = pawn.health.hediffSet.HasHediff(HediffDef.Named("SeasFavor"))
-                ? DefDatabase<EffecterDef>.GetNamed("GoldenFishing")
-                : EffecterDefOf.Fishing;
-
-            // 使用特效
-            toil.WithEffect(effectToUse, () => job.GetTarget(TargetIndex.A));
-            toil.WithProgressBarToilDelay(TargetIndex.B);
-
-            // 加技能增长
-            toil.tickAction = () =>
+            foreach (var toil in toils)
             {
-                pawn.skills?.Learn(SkillDefOf.Animals, 0.025f);
-            };
+                // WaitWith toil 的特征：tickAction 不为空
+                if (toil.tickAction != null)
+                {
+                    if (__instance.pawn.health.hediffSet.HasHediff(SeasFavor))
+                    {
+                        // 模拟多杆钓鱼的效果（其实只是叠加个特效）
+                        toil.WithEffect(
+                            GoldenFishing,
+                            () => __instance.job.GetTarget(TargetIndex.A),
+                            null
+                        );
+                    }
 
-            toils.Add(toil);
-
-            // 完成 Toil
-            toils.Add(AccessTools.Method(typeof(JobDriver_Fish), "CompleteFishingToil")
-                .Invoke(__instance, null) as Toil);
+             
+                    break;
+                }
+            }
 
             __result = toils;
-            return false; // 完全替换原流程
         }
     }
 }
