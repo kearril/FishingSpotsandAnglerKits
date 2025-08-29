@@ -5,8 +5,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>FishingSpot</defName>
     <label>Fishing Spot</label>
-    <description>A fishing spot where your colonists will prioritize fishing. Can only be placed
-      next to a fishing area</description>
+    <description>A fishing spot where your colonists will prioritize fishing. Can only be placed next to a fishing area</description>
     <graphicData>
       <texPath>FishingSpot</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -43,8 +42,7 @@
   <ThingDef ParentName="ArtableFurnitureBase">
     <defName>Fishermansfoldingchair</defName>
     <label>Fisherman's folding chair</label>
-    <description>A small chair that provides some comfort to colonists while they are fishing. Can
-      only be built at a fishing spot.</description>
+    <description>A small chair that provides some comfort to colonists while they are fishing. Can only be built at a fishing spot.</description>
     <passability>Standable</passability>
     <terrainAffordanceNeeded>Walkable</terrainAffordanceNeeded>
     <graphicData>
@@ -100,8 +98,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>BaitBox</defName>
     <label>Bait Box</label>
-    <description>A fishing bait box, which contains bait and can provide fishing speed bonus to
-      surrounding colonists.You can use Kibble or Megaspider Meat to fill.</description>
+    <description>A fishing bait box, which contains bait and can provide fishing speed bonus to surrounding colonists.You can use Kibble or Megaspider Meat to fill.</description>
     <tickerType>Normal</tickerType>
     <terrainAffordanceNeeded>Walkable</terrainAffordanceNeeded>
     <drawerType>RealtimeOnly</drawerType>
@@ -205,7 +202,7 @@
     <defName>GoldenFishingRod</defName>
     <label>Golden Fishing Rod</label>
     <techLevel>Neolithic</techLevel>
-    <description>This is a magical fishing rod that brings good luck to people</description>
+    <description>Equip this fishing rod, you can use two fishing rods to fish at the same time, and you can also get the good luck bonus brought by the golden fishing rod.</description>
     <graphicData>
       <texPath>Golden_Fishing_Rod</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -255,6 +252,7 @@
       <li Class="FishingSpotsandAnglerKits.CompProperties_GiveHediffOnEquip">
         <hediffDefs>
           <li>SeasFavor</li>
+          <li>dualfishingrods</li>
         </hediffDefs>
 
       </li>
@@ -285,12 +283,30 @@
     <isBad>false</isBad>
   </HediffDef>
 
+    <HediffDef>
+    <defName>dualfishingrods</defName>
+    <label>Fishing (dual fishing rods)</label>
+    <description>This unit uses two fishing rods to fish at the same time, which greatly increases the fishing speed and fishing efficiency</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+    <comps>     
+      <li Class="HediffCompProperties_DisappearsOnDeath" />      
+    </comps>
+    <stages>
+      <li>        
+        <statOffsets>
+          <FishingYield>0.2</FishingYield>
+          <FishingSpeed>0.75</FishingSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+    <isBad>false</isBad>
+  </HediffDef>
 
   <StatDef>
     <defName>FishingRareMultiplier</defName>
     <label>Fishing Rare Multiplier</label>
-    <description>The original rare probability is 1%, this multiplier is used to increase the rare
-      probability. The final settlement probability is 1%*this value</description>
+    <description>The original rare probability is 1%, this multiplier is used to increase the rare probability. The final settlement probability is 1%*this value</description>
     <category>PawnWork</category>
     <minValue>1</minValue>
     <toStringStyle>PercentZero</toStringStyle>
@@ -302,8 +318,8 @@
     <defName>GoldenFishing</defName>
     <children>
       <li>
-        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
-        <!-- Using this typeinstead of InteractSymbol to get better positioning -->
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass> <!-- Using this type
+        instead of InteractSymbol to get better positioning -->
         <spawnLocType>OnSource</spawnLocType>
         <maxMoteCount>1</maxMoteCount>
         <destroyMoteOnCleanup>True</destroyMoteOnCleanup>
